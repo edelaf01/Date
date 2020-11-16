@@ -115,9 +115,9 @@ public class Date {
 	boolean isSame2(Date another) {
 
 		while (this.year != another.getYear()) {
-			return false;
+			return true;
 		}
-		return true;
+		return false;
 	}
 	// devuelve el nombre de los meses
 
@@ -271,28 +271,28 @@ public class Date {
 
 		case 2:
 
-		case 3:
+		case 12:
 			getSeasonName = "WINTER";
 			break;
+		case 3:
 		case 4:
 
 		case 5:
 
-		case 6:
 			getSeasonName = "SPRING";
 			break;
+		case 6:
 		case 7:
 
 		case 8:
 
-		case 9:
 			getSeasonName = "SUMMER";
 			break;
 		case 10:
 
 		case 11:
 
-		case 12:
+		case 9:
 			getSeasonName = "AUTUMN";
 			break;
 		}
@@ -333,12 +333,17 @@ public class Date {
 	public String getMonthsLeft() {
 
 		StringBuilder months = new StringBuilder();
-
+		int reset = this.month;
 		for (int i = this.month; i <= 12; i++) {
 			this.month = this.month + 1;
 			months.append("\n" + this.getmonthName());
 		}
-
+		try {
+			this.setMonth(reset);
+		} catch (DateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return months.toString();
 
 	}
@@ -368,8 +373,48 @@ public class Date {
 
 		return getDaysLeftMonth.toString();
 	}
+
 	// devuelve todos los meses con el mismo numero de dias
+	public String getMonthsSameDays() {
+
+		StringBuilder months = new StringBuilder();
+		int filtro = 0, reset = 0;
+		reset = this.month;
+		filtro = this.getDaysOfMonth();
+		// Para no crear un nuevo objeto date ,despues lo vuelvo a dejar como estaba
+		this.month = 0;
+		for (int i = 1; i <= 12; i++) {
+			this.month = this.month + 1;
+		
+			if (this.getDaysOfMonth() == filtro) {
+				months.append(this.getmonthName()).append(" ");
+			}
+		}
+		this.month = reset;
+		return months.toString();
+	}
 	// contar el numero de dias desde el primer dia del anyo
+	public int daysPast(){
+		int days=0,auxm=0,auxd=0;
+		auxm=this.month;
+		auxd=this.day;
+		for (int i=this.month;i>0;i--){
+			
+			for (int j=this.day;j>0;j--){
+				
+				this.day = this.day-1;
+				days++;
+			}
+			
+			this.month = this.month-1;
+			this.day=this.getDaysOfMonth();
+		}
+		this.month=auxm;
+		this.day=auxd;
+		days--;
+		
+		return days;
+}
 	// generar date aleatoria y contar los intentos en el mismo año while y do while
 	// devolver el dia dado una fecha lo ultimo del pdf
 
