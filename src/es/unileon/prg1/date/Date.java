@@ -4,7 +4,8 @@ public class Date {
 	private int day;
 	private int month;
 	private int year;
-	
+	//
+	private int same;
 	public Date (int day, int month, int year) throws DateException {
 		//this.month = month;
 		this.setMonth(month);
@@ -31,7 +32,88 @@ public class Date {
 	public void setYear (int year) {
 		this.year = year;
 	}
+	//Metodos get
+	public int getYear(){
+		return this.year;
+	}
+	public int getMonth(){
+		return this.month;
+	}
+	public int getDay(){
+		return this.day;
+	}
+	public int getSame(){
+		return this.same;
+	}
+	//Metodos is same con if
+	boolean isSameYear(Date another){
+		if ( this.year == another.getYear() ){
+			return true;
+		}
+		return false;
+	}
 	
+	boolean isSameMonth(Date another){
+		
+		if ( this.month == another.getMonth() ){
+			return true;
+		}
+		return false;
+	}
+	
+	boolean isSameDay(Date another){
+		
+		if ( this.day == another.getDay() ){
+			return true;
+		}
+		return false;
+	}
+	
+	boolean isSame(Date another){
+		
+		if ( this.isSameDay(another) && this.isSameMonth(another) && this.isSameYear(another)){
+			return true;
+		}
+		return false;
+	}
+	//metodos sin if
+	boolean isSameYear2(Date another){
+		while(this.year == another.getYear()) {
+			return true;
+		}
+		return false;
+		
+	}
+	
+	boolean isSameMonth2(Date another){
+		boolean x=(this.getMonth()==another.getMonth());
+		return x;
+		
+	}
+	
+	boolean isSameDay2(Date another){
+		
+		int x=this.getDay();
+		int y=another.getDay();
+		int comp=(x==y) ? 1: 0;
+			switch(comp) {
+			case 1:
+				return true;
+			default:
+				return false;
+			}
+		
+		
+	}
+	
+	boolean isSame2(Date another){
+		
+		while(this.year != another.getYear()) {
+			return false;
+		}
+		return true;
+	}
+	//
 	private int getDaysOfMonth() {
 		int numDays;
 		
