@@ -385,7 +385,7 @@ public class Date {
 		this.month = 0;
 		for (int i = 1; i <= 12; i++) {
 			this.month = this.month + 1;
-		
+
 			if (this.getDaysOfMonth() == filtro) {
 				months.append(this.getmonthName()).append(" ");
 			}
@@ -393,29 +393,101 @@ public class Date {
 		this.month = reset;
 		return months.toString();
 	}
+
 	// contar el numero de dias desde el primer dia del anyo
-	public int daysPast(){
-		int days=0,auxm=0,auxd=0;
-		auxm=this.month;
-		auxd=this.day;
-		for (int i=this.month;i>0;i--){
-			
-			for (int j=this.day;j>0;j--){
-				
-				this.day = this.day-1;
+	public int daysPast() {
+		int days = 0, auxm = 0, auxd = 0;
+		auxm = this.month;
+		auxd = this.day;
+		for (int i = this.month; i > 0; i--) {
+
+			for (int j = this.day; j > 0; j--) {
+
+				this.day = this.day - 1;
 				days++;
 			}
-			
-			this.month = this.month-1;
-			this.day=this.getDaysOfMonth();
+
+			this.month = this.month - 1;
+			this.day = this.getDaysOfMonth();
 		}
-		this.month=auxm;
-		this.day=auxd;
+		this.month = auxm;
+		this.day = auxd;
 		days--;
-		
+
 		return days;
-}
+	}
+
+	public int daysOfMonth() {
+
+		int monthRight = 0;
+
+		switch (this.month) {
+
+		case 1:
+			monthRight = 31;
+			break;
+		case 2:
+			monthRight = 28;
+			break;
+		case 3:
+			monthRight = 31;
+			break;
+		case 4:
+			monthRight = 30;
+			break;
+		case 5:
+			monthRight = 31;
+			break;
+		case 6:
+			monthRight = 30;
+			break;
+		case 7:
+			monthRight = 31;
+			break;
+		case 8:
+			monthRight = 31;
+			break;
+		case 9:
+			monthRight = 30;
+			break;
+		case 10:
+			monthRight = 31;
+			break;
+		case 11:
+			monthRight = 30;
+			break;
+		case 12:
+			monthRight = 31;
+			break;
+
+		}
+
+		return monthRight;
+
+	}
+
 	// generar date aleatoria y contar los intentos en el mismo año while y do while
+	public int numRandomTriesEqualDate() {
+		int tries = 0, day = 0, month = 0;
+		int auxMes = this.getMonth(), auxDia = this.getDay();
+		do {
+			month = (int) (Math.random() * 12);
+			month++;
+			day = (int) (Math.random() * this.daysOfMonth());
+			day++;
+			if (auxMes != month || auxDia != day) {
+
+			} else {
+				// fecha correcta
+				System.out.println(day + "/" + month + "/" + this.getYear());
+				break;
+			}
+
+			tries++;
+		} while (true);
+		
+		return tries;
+	}
 	// devolver el dia dado una fecha lo ultimo del pdf
 
 }
