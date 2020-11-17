@@ -397,8 +397,8 @@ public class Date {
 	// contar el numero de dias desde el primer dia del anyo
 	public int daysPast() {
 		int days = 0, auxm = 0, auxd = 0;
-		auxm = this.month;
-		auxd = this.day;
+		auxm = this.getMonth();
+		auxd = this.getDay();
 		for (int i = this.month; i > 0; i--) {
 
 			for (int j = this.day; j > 0; j--) {
@@ -410,6 +410,7 @@ public class Date {
 			this.month = this.month - 1;
 			this.day = this.getDaysOfMonth();
 		}
+		//Lo vuelvo a dejar como estaba
 		this.month = auxm;
 		this.day = auxd;
 		days--;
@@ -489,5 +490,42 @@ public class Date {
 		return tries;
 	}
 	// devolver el dia dado una fecha lo ultimo del pdf
+	public String dayName(int day) {
+		String dayName="";
+		switch(day){
+			case 1:
+				dayName="Monday";
+			break;
+			case 2:
+				dayName="Tuesday";
+			break;
+			case 3:
+				dayName="Wendsday";
+			break;
+			case 4:
+				dayName="Thursday";
+			break;
+			case 5:
+				dayName="Friday";
+			break;
+			case 6:
+				dayName="Saturday";
+			break;
+			case 7:
+				dayName="Sunday";
+			break;
+			
+				
+		}
+		
+		return dayName;
+		
+	}
+	public String dayOfWeek(int firstOfJanuary) {//1 enero 2020 es miercoles
+		int dayNumber;
+		dayNumber = ( this.daysPast() % 7 + firstOfJanuary ) % 7;
+		
+		return dayName(dayNumber);
+	}
 
 }
